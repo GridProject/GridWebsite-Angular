@@ -291,6 +291,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this._mainnetSourceService.getMainnetEcosystem(lang)
       .subscribe(data => {
         const len = Array.isArray(data) ? data.length : 0;
+        //this only fix slow network render repeat
+        if (this.mainnetEcosystem.length) {
+          this.mainnetEcosystem = [];
+        }
         for (let i = 0; i < len;) {
           this.mainnetEcosystem.push(data.slice(i, i + 2));
           i+=2;
